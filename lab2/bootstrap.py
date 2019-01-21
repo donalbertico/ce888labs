@@ -35,3 +35,15 @@ if __name__ == "__main__":
 
 	sns_plot.savefig("bootstrap_confidence.png", bbox_inches='tight')
 	sns_plot.savefig("bootstrap_confidence.pdf", bbox_inches='tight')
+
+	veh = pd.read_csv('vehicles.csv')
+	proposed = veh.values.T[1]
+	proposed = proposed[~np.isnan(proposed)]
+	boostCu = boostrap(veh.values.T[0],len(veh.values.T[0]),1000);
+	boostNe = boostrap(proposed,len(proposed),1000);
+	print((("current upper : %s")%(boostCu[2])))
+	print((("current lower : %s")%(boostCu[1])))
+	print((("new upper : %s")%(boostNe[2])))
+	print((("new lower : %s")%(boostNe[1])))
+
+	#the bounds does not really variate meaning the new fleets are not better than the current ones
