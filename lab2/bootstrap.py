@@ -6,7 +6,13 @@ import numpy as np
 
 
 def boostrap(sample, sample_size, iterations):
-	# <---INSERT YOUR CODE HERE--->
+	means = []
+	for i in range(0,iterations):
+		arr = np.random.choice(sample,sample_size,replace = True)
+		means.append(np.mean(arr))
+	data_mean = np.mean(means)
+	lower = np.percentile(means, 97.5)
+	upper = np.percentile(means, 2.5)
 	return data_mean, lower, upper
 
 
@@ -29,11 +35,3 @@ if __name__ == "__main__":
 
 	sns_plot.savefig("bootstrap_confidence.png", bbox_inches='tight')
 	sns_plot.savefig("bootstrap_confidence.pdf", bbox_inches='tight')
-
-
-	#print ("Mean: %f")%(np.mean(data))
-	#print ("Var: %f")%(np.var(data))
-	
-
-
-	
